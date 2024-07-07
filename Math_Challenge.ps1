@@ -11,7 +11,6 @@ function Get-DigitSum {
     )
     # Convert the number to a string to easily access each digit
     $digits = $number.ToString().ToCharArray()
-
     # Initialize sum to 0
     $sum = 0
     # Loop through each digit and add it to the sum
