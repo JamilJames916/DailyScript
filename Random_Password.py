@@ -37,4 +37,6 @@ num_symbols = 4  # Number of random symbols to append
 password = generate_password(num_words, word_length, num_symbols)
 print("Generated password:", password)
 
+# Run the script
+# C:/Users/jamiljames/AppData/Local/Programs/Python/Python311/python.exe Random_Password.py
 
