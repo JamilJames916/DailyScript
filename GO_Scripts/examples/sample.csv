@@ -1,0 +1,9 @@
+id,name,email,age,city,department,salary,active
+1,John Doe,john.doe@company.com,30,New York,Engineering,75000,true
+2,Jane Smith,jane.smith@company.com,28,San Francisco,Product,85000,true
+3,Bob Johnson,bob.johnson@company.com,35,Austin,DevOps,80000,false
+4,Alice Brown,alice.brown@company.com,32,Seattle,Design,70000,true
+5,Charlie Wilson,charlie.wilson@company.com,29,Boston,Marketing,65000,true
+6,Diana Davis,diana.davis@company.com,31,Chicago,Sales,90000,true
+7,Frank Miller,frank.miller@company.com,33,Denver,Engineering,78000,false
+8,Grace Lee,grace.lee@company.com,27,Portland,Product,82000,true

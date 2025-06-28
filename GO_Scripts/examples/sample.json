@@ -1,0 +1,58 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "age": 30,
+      "city": "New York",
+      "active": true,
+      "profile": {
+        "bio": "Software developer with 5 years of experience",
+        "skills": ["JavaScript", "Python", "Go"],
+        "social": {
+          "twitter": "@johndoe",
+          "github": "johndoe"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "age": 28,
+      "city": "San Francisco",
+      "active": true,
+      "profile": {
+        "bio": "Full-stack developer and tech enthusiast",
+        "skills": ["React", "Node.js", "Docker"],
+        "social": {
+          "twitter": "@janesmith",
+          "github": "janesmith"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "name": "Bob Johnson",
+      "email": "bob.johnson@example.com",
+      "age": 35,
+      "city": "Austin",
+      "active": false,
+      "profile": {
+        "bio": "DevOps engineer specializing in cloud infrastructure",
+        "skills": ["AWS", "Kubernetes", "Terraform"],
+        "social": {
+          "twitter": "@bobjohnson",
+          "github": "bobjohnson"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "created": "2024-01-01T00:00:00Z",
+    "total_users": 3,
+    "active_users": 2
+  }
+}

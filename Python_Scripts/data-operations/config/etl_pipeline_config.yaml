@@ -1,0 +1,75 @@
+# ETL Pipeline Configuration
+source:
+  type: csv
+  config:
+    file_path: "data/input/sales_data.csv"
+    encoding: "utf-8"
+    delimiter: ","
+
+destination:
+  type: database
+  config:
+    connection_string: "postgresql://user:password@localhost:5432/warehouse"
+    table_name: "sales_fact"
+    if_exists: "append"
+
+transformations:
+  transformations:
+    - type: drop_columns
+      columns: ["temp_column", "debug_info"]
+    
+    - type: rename_columns
+      mapping:
+        "old_name": "new_name"
+        "sale_date": "transaction_date"
+    
+    - type: convert_types
+      mapping:
+        transaction_date: datetime
+        amount: numeric
+        quantity: int
+    
+    - type: clean_data
+      operations:
+        remove_duplicates: true
+        handle_nulls: "fill"
+        fill_value: 0
+        trim_strings: true
+    
+    - type: filter_rows
+      conditions:
+        - column: amount
+          operator: ">"
+          value: 0
+        - column: status
+          operator: "in"
+          value: ["completed", "paid"]
+    
+    - type: aggregate
+      group_by: ["product_id", "date"]
+      aggregations:
+        amount: "sum"
+        quantity: "sum"
+        transactions: "count"
+
+validation:
+  checks:
+    - type: not_null
+      columns: ["transaction_date", "amount", "product_id"]
+    
+    - type: unique
+      columns: ["transaction_id"]
+    
+    - type: range
+      column: amount
+      min: 0
+      max: 100000
+    
+    - type: format
+      column: email
+      pattern: "^[\\w\\.-]+@[\\w\\.-]+\\.[a-zA-Z]{2,}$"
+
+pipeline:
+  stop_on_validation_error: true
+  batch_size: 1000
+  parallel_processing: true

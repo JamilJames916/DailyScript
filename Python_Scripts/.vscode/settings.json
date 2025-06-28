@@ -1,0 +1,39 @@
+{
+    "python.defaultInterpreterPath": "python",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.formatting.provider": "black",
+    "python.linting.flake8Enabled": true,
+    "files.associations": {
+        "*.yaml": "yaml",
+        "*.yml": "yaml"
+    },
+    "yaml.schemas": {
+        "file:///schemas/backup-config.json": [
+            "**/config/backup_config.yaml",
+            "**/config/*backup*.yaml"
+        ],
+        "file:///schemas/etl-config.json": [
+            "**/config/etl_*.yaml",
+            "**/config/*etl*.yaml"
+        ]
+    },
+    "python.analysis.extraPaths": [
+        "./data-operations",
+        "./aws-operations",
+        "./monitoring",
+        "./automation"
+    ],
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/venv": true,
+        "**/.env": false
+    },
+    "editor.rulers": [88],
+    "python.formatting.blackArgs": ["--line-length=88"],
+    "python.linting.pylintArgs": [
+        "--max-line-length=88",
+        "--disable=C0111,C0103,R0903"
+    ]
+}

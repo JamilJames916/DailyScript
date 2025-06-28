@@ -1,0 +1,51 @@
+{
+    "folders": [
+        {
+            "name": "GO_Scripts Root",
+            "path": "."
+        },
+        {
+            "name": "CLI Tools",
+            "path": "./cli-tools"
+        },
+        {
+            "name": "File Operations", 
+            "path": "./file-operations"
+        },
+        {
+            "name": "HTTP Tools",
+            "path": "./http-server"
+        },
+        {
+            "name": "HTTP Client",
+            "path": "./http-client"
+        },
+        {
+            "name": "JSON Tools",
+            "path": "./json-tools"
+        },
+        {
+            "name": "CSV Tools",
+            "path": "./csv-tools"
+        },
+        {
+            "name": "Web Scraper",
+            "path": "./web-scraper"
+        },
+        {
+            "name": "Concurrent Examples",
+            "path": "./concurrent"
+        },
+        {
+            "name": "System Info",
+            "path": "./system-info"
+        }
+    ],
+    "settings": {
+        "go.toolsManagement.checkForUpdates": "local",
+        "go.useLanguageServer": true,
+        "go.buildOnSave": "off",
+        "go.lintOnSave": "off",
+        "go.vetOnSave": "off"
+    }
+}

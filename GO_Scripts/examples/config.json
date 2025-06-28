@@ -1,0 +1,31 @@
+{
+  "app": {
+    "name": "Go Common Scripts",
+    "version": "1.0.0",
+    "description": "Collection of common utility scripts written in Go"
+  },
+  "server": {
+    "host": "localhost",
+    "port": 8080,
+    "timeout": 30,
+    "ssl_enabled": false
+  },
+  "database": {
+    "host": "localhost",
+    "port": 5432,
+    "name": "example_db",
+    "ssl_mode": "disable",
+    "max_connections": 10
+  },
+  "logging": {
+    "level": "info",
+    "format": "json",
+    "output": "stdout"
+  },
+  "features": {
+    "file_operations": true,
+    "web_scraping": true,
+    "data_processing": true,
+    "http_tools": true
+  }
+}

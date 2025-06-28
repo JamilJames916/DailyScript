@@ -1,0 +1,20 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Go Scripts",
+			"type": "shell",
+			"command": "go",
+			"args": [
+				"build",
+				"-v",
+				"./..."
+			],
+			"group": "build",
+			"problemMatcher": [
+				"$go"
+			],
+			"isBackground": false
+		}
+	]
+}

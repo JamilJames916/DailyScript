@@ -1,0 +1,30 @@
+# Database Backup Configuration
+backup_dir: "./backups"
+compress: true
+s3_upload: true
+retention_days: 30
+email_notifications: true
+verify_backup: true
+
+# Database connections
+databases:
+  production_postgres:
+    type: postgresql
+    host: prod-db.example.com
+    port: 5432
+    database: production
+    user: backup_user
+    # Use environment variables for sensitive data
+  
+  staging_mysql:
+    type: mysql
+    host: staging-db.example.com
+    port: 3306
+    database: staging
+    user: backup_user
+
+# Backup schedule (for cron integration)
+schedule:
+  daily: "0 2 * * *"  # 2 AM daily
+  weekly: "0 3 * * 0"  # 3 AM on Sundays
+  monthly: "0 4 1 * *"  # 4 AM on first day of month

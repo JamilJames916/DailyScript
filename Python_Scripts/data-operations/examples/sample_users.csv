@@ -1,0 +1,11 @@
+id,name,email,created_at,last_login,status
+1,John Doe,john.doe@example.com,2024-01-15 10:30:00,2024-01-20 14:22:33,active
+2,Jane Smith,jane.smith@example.com,2024-01-16 09:15:22,2024-01-19 16:45:12,active
+3,Bob Johnson,bob.johnson@example.com,2024-01-17 11:45:33,NULL,inactive
+4,Alice Brown,alice.brown@example.com,2024-01-18 08:20:15,2024-01-21 09:33:44,active
+5,Charlie Wilson,charlie.wilson@example.com,2024-01-19 13:55:27,2024-01-20 11:22:18,active
+6,Diana Davis,diana.davis@example.com,2024-01-20 15:30:45,NULL,pending
+7,Eve Miller,eve.miller@example.com,2024-01-21 12:10:33,2024-01-21 18:45:22,active
+8,Frank Garcia,frank.garcia@example.com,2024-01-22 14:25:18,2024-01-22 20:11:55,active
+9,Grace Lee,grace.lee@example.com,2024-01-23 10:40:12,NULL,inactive
+10,Henry Wang,henry.wang@example.com,2024-01-24 16:15:30,2024-01-24 21:33:44,active

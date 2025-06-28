@@ -1,0 +1,53 @@
+# Data Sync Configuration
+source:
+  type: postgresql
+  config:
+    connection_string: "postgresql://sync_user:password@source-db.example.com:5432/production"
+
+target:
+  type: postgresql
+  config:
+    connection_string: "postgresql://sync_user:password@target-db.example.com:5432/staging"
+
+sync_mode: realtime
+conflict_resolution: source_wins
+
+sync_rules:
+  # Tables to synchronize
+  tables:
+    - users
+    - orders
+    - products
+    - inventory
+  
+  # Primary key for conflict resolution
+  primary_key: id
+  
+  # Sync interval for realtime mode (seconds)
+  sync_interval: 30
+  
+  # Watch directories for file-based sync
+  watch_directories:
+    - "/data/uploads"
+    - "/data/exports"
+  
+  # Tables to exclude from sync
+  exclude_tables:
+    - audit_logs
+    - temporary_data
+    - cache_tables
+  
+  # Enable Redis for change tracking
+  use_redis: true
+
+monitoring:
+  # Enable email notifications
+  email_notifications: true
+  
+  # Notification settings
+  alert_on_errors: true
+  alert_on_conflicts: true
+  
+  # Metrics collection
+  collect_metrics: true
+  metrics_interval: 300  # 5 minutes

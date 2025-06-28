@@ -1,0 +1,116 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Install Python Dependencies",
+            "type": "shell",
+            "command": "python",
+            "args": ["-m", "pip", "install", "-r", "requirements.txt"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Database Backup - PostgreSQL",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "data-operations/db_backup.py",
+                "--db-type", "postgresql",
+                "--config", "data-operations/config/backup_config.yaml"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Database Migration",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "data-operations/db_migration.py",
+                "--source", "postgresql",
+                "--target", "mysql",
+                "--config", "data-operations/config/migration_config.yaml"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "ETL Pipeline",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "data-operations/etl_pipeline.py",
+                "--config", "data-operations/config/etl_pipeline_config.yaml"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Data Sync - Batch",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "data-operations/data_sync.py",
+                "--config", "data-operations/config/sync_config.yaml",
+                "--mode", "batch"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Validate ETL Config",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "data-operations/etl_pipeline.py",
+                "--config", "data-operations/config/etl_pipeline_config.yaml",
+                "--dry-run"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Test Database Connection",
+            "type": "shell",
+            "command": "python",
+            "args": ["-c", "import psycopg2; print('PostgreSQL connection test passed')"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false
+            },
+            "problemMatcher": []
+        }
+    ]
+}

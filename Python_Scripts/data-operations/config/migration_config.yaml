@@ -1,0 +1,53 @@
+# Migration Configuration
+batch_size: 1000
+max_workers: 4
+incremental: false
+validate_data: true
+create_schema: true
+drop_target_tables: false
+
+# Source and target database configurations
+source:
+  type: postgresql
+  host: source-db.example.com
+  port: 5432
+  database: source_db
+  user: migration_user
+  # Use environment variables: SOURCE_DB_PASSWORD
+
+target:
+  type: mysql
+  host: target-db.example.com
+  port: 3306
+  database: target_db
+  user: migration_user
+  # Use environment variables: TARGET_DB_PASSWORD
+
+# Data transformation rules
+transformation_rules:
+  users:
+    - type: replace
+      column: status
+      from: 'active'
+      to: 'A'
+    - type: convert_type
+      column: created_at
+      target_type: datetime
+    - type: default_value
+      column: last_login
+      value: null
+
+  orders:
+    - type: replace
+      column: currency
+      from: 'USD'
+      to: 'US Dollar'
+
+# Tables to migrate (empty means all tables)
+tables: []
+
+# Exclude tables
+exclude_tables:
+  - temp_data
+  - log_entries
+  - cache_table

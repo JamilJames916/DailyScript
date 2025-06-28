@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "user_id": 1,
+    "product_id": 101,
+    "product_name": "Laptop",
+    "quantity": 1,
+    "price": 999.99,
+    "total": 999.99,
+    "order_date": "2024-01-15T10:30:00Z",
+    "status": "completed",
+    "payment_method": "credit_card"
+  },
+  {
+    "id": 2,
+    "user_id": 2,
+    "product_id": 102,
+    "product_name": "Mouse",
+    "quantity": 2,
+    "price": 25.99,
+    "total": 51.98,
+    "order_date": "2024-01-16T14:22:00Z",
+    "status": "completed",
+    "payment_method": "paypal"
+  },
+  {
+    "id": 3,
+    "user_id": 1,
+    "product_id": 103,
+    "product_name": "Keyboard",
+    "quantity": 1,
+    "price": 89.99,
+    "total": 89.99,
+    "order_date": "2024-01-17T09:15:00Z",
+    "status": "pending",
+    "payment_method": "credit_card"
+  },
+  {
+    "id": 4,
+    "user_id": 4,
+    "product_id": 104,
+    "product_name": "Monitor",
+    "quantity": 1,
+    "price": 299.99,
+    "total": 299.99,
+    "order_date": "2024-01-18T16:45:00Z",
+    "status": "completed",
+    "payment_method": "debit_card"
+  },
+  {
+    "id": 5,
+    "user_id": 5,
+    "product_id": 105,
+    "product_name": "Webcam",
+    "quantity": 1,
+    "price": 79.99,
+    "total": 79.99,
+    "order_date": "2024-01-19T11:30:00Z",
+    "status": "shipped",
+    "payment_method": "credit_card"
+  }
+]
