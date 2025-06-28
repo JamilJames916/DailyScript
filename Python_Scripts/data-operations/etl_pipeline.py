@@ -26,6 +26,7 @@ import yaml
 import logging
 import argparse
 import asyncio
+import tempfile
 import aiofiles
 import aiohttp
 from datetime import datetime, timedelta
@@ -182,7 +183,7 @@ class DataExtractor:
         
         # Convert XML to list of dictionaries
         records = []
-        elements = root.findall(xpath) if xpath else root
+        elements = root.findall(xpath) if xpath else [root]
         
         for element in elements:
             record = {}
@@ -202,10 +203,12 @@ class DataExtractor:
         logger.info("Extracting data from database")
         
         engine = create_engine(connection_string)
-        df = pd.read_sql(query, engine)
-        
-        logger.info(f"Extracted {len(df)} rows from database")
-        return df
+        try:
+            df = pd.read_sql(query, engine)
+            logger.info(f"Extracted {len(df)} rows from database")
+            return df
+        finally:
+            engine.dispose()
 
     async def _extract_api(self, config: Dict) -> pd.DataFrame:
         """Extract data from REST API"""
@@ -245,7 +248,7 @@ class DataExtractor:
         s3_client = boto3.client('s3')
         
         # Download file to temporary location
-        temp_file = f"/tmp/{Path(key).name}"
+        temp_file = os.path.join(tempfile.gettempdir(), Path(key).name)
         s3_client.download_file(bucket, key, temp_file)
         
         # Read based on format
@@ -282,7 +285,7 @@ class DataExtractor:
         sftp = ssh.open_sftp()
         
         # Download file
-        temp_file = f"/tmp/{Path(remote_path).name}"
+        temp_file = os.path.join(tempfile.gettempdir(), Path(remote_path).name)
         sftp.get(remote_path, temp_file)
         
         # Read based on format
@@ -419,7 +422,10 @@ class DataTransformer:
         
         if 'trim_strings' in operations:
             string_columns = df.select_dtypes(include=['object']).columns
-            df[string_columns] = df[string_columns].apply(lambda x: x.str.strip() if x.dtype == 'object' else x)
+            for col in string_columns:
+                # Only apply to non-null values to avoid converting NaN to 'nan'
+                mask = df[col].notna()
+                df.loc[mask, col] = df.loc[mask, col].astype(str).str.strip()
         
         return df
 
@@ -544,7 +550,8 @@ class DataValidator:
         column = config['column']
         pattern = config['pattern']
         
-        if not df[column].str.match(pattern).all():
+        # Convert to string first to handle non-string values
+        if not df[column].astype(str).str.match(pattern).all():
             logger.error(f"Format validation failed for column: {column}")
             return False
         
@@ -623,10 +630,12 @@ class DataLoader:
         logger.info(f"Loading {len(df)} rows to database table: {table_name}")
         
         engine = create_engine(connection_string)
-        df.to_sql(table_name, engine, if_exists=if_exists, index=False)
-        
-        logger.info("Database loading completed")
-        return True
+        try:
+            df.to_sql(table_name, engine, if_exists=if_exists, index=False)
+            logger.info("Database loading completed")
+            return True
+        finally:
+            engine.dispose()
 
     async def _load_s3(self, df: pd.DataFrame, config: Dict) -> bool:
         """Load data to S3"""
@@ -637,7 +646,7 @@ class DataLoader:
         logger.info(f"Loading {len(df)} rows to S3: s3://{bucket}/{key}")
         
         # Save to temporary file
-        temp_file = f"/tmp/{Path(key).name}"
+        temp_file = os.path.join(tempfile.gettempdir(), Path(key).name)
         
         if file_format == 'csv':
             df.to_csv(temp_file, index=False)
