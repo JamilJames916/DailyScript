@@ -35,5 +35,6 @@
     "python.linting.pylintArgs": [
         "--max-line-length=88",
         "--disable=C0111,C0103,R0903"
-    ]
+    ],
+    "svn.ignoreMissingSvnWarning": true
 }
